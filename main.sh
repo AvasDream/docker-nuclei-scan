@@ -9,3 +9,5 @@ function notify {
 
 notify "$1"
 
+hello
+
