@@ -20,5 +20,6 @@ function main {
 
 { time main ; } 2> time.txt
 t=$(cat time.txt | grep real | cut -d " " -f2)
-notify "Nuclei for $DOMAIN in $t"
+number_domains=$(cat $inputfile | wc -l)
+notify "Nuclei for $DOMAIN with $number_domains subdomains in $t"
 
