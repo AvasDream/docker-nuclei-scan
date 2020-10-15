@@ -7,4 +7,4 @@
 
 ## Execution 
 
-`docker run -it --rm -v "$(pwd):/data" nuclei $domain $file`
+`docker run -it --rm -v "$(pwd):/data" nuclei $domain /data/$file`
