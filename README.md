@@ -7,4 +7,4 @@
 
 ## Execution 
 
-`docker run -it --rm -v "$(pwd):/data" nuclei redguard.ch domains.txt`
+`docker run -it --rm -v "$(pwd):/data" nuclei $domain $file`
