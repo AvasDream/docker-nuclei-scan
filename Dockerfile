@@ -2,13 +2,24 @@ FROM golang:latest
 
 RUN mkdir /tools
 RUN mkdir /code
-ENV toolsdir="tools"
+RUN mkdir /data
+ENV toolsdir="/tools"
 
 RUN apt update &&\
     apt install git &&\
     apt install python3 python3-pip -y 
 
 RUN pip3 install python-telegram-bot --upgrade
+
+RUN cd ${toolsdir} || { echo "Something went wrong"; exit 1; } &&\
+    git clone -q https://github.com/projectdiscovery/nuclei.git &&\
+    cd nuclei/v2/cmd/nuclei/ || { echo "Something went wrong"; exit 1; } &&\
+    go build &&\
+    mv nuclei /usr/local/bin/
+
+RUN cd ${toolsdir}'/nuclei' || { echo "Something went wrong"; exit 1; } &&\
+    git clone -q https://github.com/projectdiscovery/nuclei-templates.git
+
 
 COPY message.py /code/message.py
 COPY telegram.token /code/telegram.token
